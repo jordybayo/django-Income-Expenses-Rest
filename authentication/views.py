@@ -137,7 +137,7 @@ class PasswordTokenCheckAPI(generics.GenericAPIView):
             try:
                 if not PasswordResetTokenGenerator().check_token(user):
                     return CustomRedirect(redirect_url+'?token_valid=False')
-                    
+
             except UnboundLocalError as e:
                 return Response({'error': 'Token is not valid, please request a new one'}, status=status.HTTP_400_BAD_REQUEST)
 

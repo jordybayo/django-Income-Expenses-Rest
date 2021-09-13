@@ -12,13 +12,24 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import datetime
+from pathlib import Path
+from dotenv import load_dotenv
+
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+#load env file
+load_dotenv(os.path.join(BASE_DIR,'.env'))
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+#SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '@6p-h7#oy4unyb4+(@i&3eq(knbkvjkeyv&@*8+a%f45b@mfm1'
@@ -44,7 +55,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'authentication',
     'expenses',
-    'income'
+    'income',
+    'userstats'
 ]
 
 SWAGGER_SETTINGS = {
@@ -166,5 +178,7 @@ STATIC_URL = '/static/'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER =  os.getenv('EMAIL_HOST_USER')
+print(EMAIL_HOST_USER)
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+print(EMAIL_HOST_PASSWORD)
